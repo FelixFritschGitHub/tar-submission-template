@@ -1,0 +1,149 @@
+\ProvidesPackage{tar}
+% Description: This template provides basic formatting according to submission requirements for The Accounting Review
+% Author: Felix Fritsch
+% Date: December 21, 2023
+
+% ================================
+% I. General formatting settings
+% ================================
+
+% 1. In overleaf settings: Set compiler to pdfLatex (otherwise, it is not possible to compile text as TimesNewRoman)
+
+% 2. Set 1-inch margins
+\RequirePackage{geometry}
+\geometry{a4paper, top=1in, bottom=1in, left=1in, right=1in} % delete a4paper if applicable
+
+% 3. font settings:
+\RequirePackage{ragged2e}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{mathptmx}
+
+% 3. Set double-spacing
+\RequirePackage{setspace}
+\doublespacing
+
+% -----------------------------
+% Section title formatting
+% -----------------------------
+\RequirePackage{titlesec}
+
+% First-level headings (Section)
+\titleformat{\section}[block]
+  {\centering\large\bfseries}{\Roman{section}.}{0.5em}{\MakeUppercase}
+
+% Second-level headings (Subsection)
+\titleformat{\subsection}[hang]
+  {\large\bfseries}{}{0em}{}
+
+% Third-level headings (Subsubsection)
+\titleformat{\subsubsection}[hang]
+  {\large\bfseries\itshape}{}{0em}{}
+
+% Fourth-level headings (Paragraph)
+\titleformat{\paragraph}[runin]
+  {\bfseries}{\theparagraph}{1em}{}
+\titlespacing{\paragraph}{\parindent}{*1}{*1}
+
+
+% ================================
+% II. Title page formatting
+% ================================
+\newcommand{\tartitlepage}{
+\begin{titlepage}
+\newgeometry{left=1in,right=1in,top=1.5in,bottom=1in} % Set page margins
+\singlespacing % Single line spacing
+
+\centering
+% Title
+{\LARGE\bfseries \thetitle \par}
+\vspace{1.5cm}
+
+% Authors and affiliations
+{\large \authorA \par}
+{\small \affiliationA \par}
+\vspace{0.5cm}
+{\large \authorB \par}
+{\small \affiliationB \par}
+\vspace{0.5cm}
+{\large \authorC \par}
+{\small \affiliationC \par}
+
+\vspace{1.5cm}
+
+\begin{flushleft}
+
+% Running head
+\flushleft \small \textbf{Running Head:} \runninghead
+\vspace{0.25cm}
+
+% Acknowledgments and other information
+\ifdefined\acknowledgmenttext
+    \begin{justify}
+
+\small \textbf{Acknowledgments:} \acknowledgmenttext  % Max 150 words!
+\end{justify}    
+%\vspace{0.25cm}
+
+\begin{justify}
+\textbf{Affiliation and contact details:}
+\authorA, \affiliationA, \affiliationAaddress, E-mail: \authorAemail; 
+\authorB, \affiliationB, \affiliationBaddress, E-mail: \authorBemail; 
+\authorC, \affiliationC, \affiliationCaddress, E-mail: \authorCemail
+\end{justify}
+
+\begin{flushleft}
+\textbf{Competing interests:} \competinginteresttext
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Compliance with ethical standards:} \ethicaldisclosure
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Data Availability:} \dataavailabilitytext 
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Funding:} \fundinginformationtext
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{JEL Classifications:} \jelclassification
+\end{flushleft}
+
+\begin{flushleft}
+\textbf{Keywords:} \keywordlist
+\end{flushleft}
+\end{flushleft}
+\fi
+\end{titlepage}
+}
+
+\newcommand{\tarfirstpagetitle}{
+{\centering \LARGE\bfseries \thetitle \par}
+\vspace{1.5cm}}
+
+% ======================
+% III: Referencing
+% ======================
+\RequirePackage[authordate, natbib, maxbibnames=99, maxcitenames=2,  citetracker=true, backend=biber,giveninits, isbn=false, doi=false, uniquename=mininit]{biblatex-chicago} % sorting=nty
+
+\setlength\bibitemsep{0pt} % \baselineskip make space line between reference items 
+\DeclareFieldFormat[article]{title}{#1} 
+\AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{5}}}
+
+\DeclareNameWrapperFormat{labelname:poss}{#1's}
+
+\newrobustcmd*{\posscitealias}{%
+  \AtNextCite{%
+    \DeclareNameWrapperAlias{labelname}{labelname:poss}}}
+
+\newrobustcmd*{\posscite}{%
+  \posscitealias
+  \textcite}
+
+\newrobustcmd*{\Posscite}{\bibsentence\posscite}
+
+\newrobustcmd*{\posscites}{%
+  \posscitealias
+  \textcites}

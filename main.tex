@@ -1,0 +1,100 @@
+\documentclass[12pt]{article} % set font size to 12pt
+\usepackage[utf8]{inputenc}
+\usepackage{tar} % import the style package about here
+\addbibresource{example_references.bib} % Add your bib file 
+\usepackage{csquotes}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{placeins}
+
+% -----------------------
+% Titlepage settings: % You need to add all of the corresponding information to your main.tex file!
+% -----------------------
+\title{Paper Title}
+\makeatletter
+\let\thetitle\@title
+\makeatother
+\newcommand{\runninghead}{\thetitle}
+
+% Define commands for authors and affiliations
+\newcommand{\authorA}{First Author}
+\newcommand{\affiliationA}{University A}
+\newcommand{\affiliationAaddress}{Address University A}
+\newcommand{\authorAemail}{email@unia.edu}
+\newcommand{\authorB}{Second Author}
+\newcommand{\affiliationB}{University B}
+\newcommand{\authorBemail}{email@unib.edu}
+\newcommand{\affiliationBaddress}{Address B}
+\newcommand{\authorC}{Third Author}
+\newcommand{\affiliationC}{University C}
+\newcommand{\authorCemail}{email@unib.edu}
+\newcommand{\affiliationCaddress}{Address C}
+
+% Define JEL classifications
+\newcommand{\jelclassification}{
+A01, % Description 1
+A02, % Description 2
+A03, % Description 3
+A04  % Description 4
+}
+
+% Set keyword list
+\newcommand{\keywordlist}{KeyA; keyb; keyc; keyd}
+
+% Add acknowledgment text
+\newcommand{\acknowledgmenttext}{We thank ....}
+
+% Add competing interest text
+\newcommand{\competinginteresttext}{The authors have no relevant interests to disclose...}
+
+% Add ethical disclosure text
+\newcommand{\ethicaldisclosure}{Add ethical statement or disclosure if applicable.}
+
+% Add data availability information
+\newcommand{\dataavailabilitytext}{Add data availability information if applicable.}
+
+% Add data funding information text
+\newcommand{\fundinginformationtext}{Add funding information.}
+
+\begin{document}
+% ====================================================
+% TAR Title Page (to be submitted separately)
+% ====================================================
+\tartitlepage
+
+% ====================================================
+% TAR anonymized main text
+% ====================================================
+\newgeometry{left=1in,right=1in,top=1in,bottom=1in} % Set page margins to TAR settings, change paperformat to a4paper if applicable
+\tarfirstpagetitle % no
+\vspace{-1em}
+\section*{Abstract}
+\lipsum[1-6][1-20]
+
+\section{Introduction}
+\lipsum[1-4]
+
+\section{Theory}
+\lipsum[4-5]
+
+\section{Research design}
+\lipsum[5-6]
+
+\section{Results}
+\lipsum[6-9]
+
+\section{Conclusion}
+\lipsum[9]
+
+Test-citations: \textcite{Gallani2019BudgetingMisreporting} \parencite{Matejka2017BalancingEvidence, Valchev2023BiasedSurveys}
+
+
+\newpage
+\FloatBarrier
+{\setstretch{1.1} \printbibliography}
+\newpage
+
+\section*{Appendix}
+
+\end{document}
